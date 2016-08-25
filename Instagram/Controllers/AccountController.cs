@@ -86,7 +86,7 @@ namespace Ninja.Instagram.API.Controllers
             }
             catch (WebException wex)
             {
-                CheckWebException<LoginException, LoginFailedResponse>(wex, "Failed to login. Could not login.");
+                CheckWebException<LoginException>(wex, "Failed to login. Could not login.");
             }
             catch (Exception ex)
             {
@@ -168,7 +168,7 @@ namespace Ninja.Instagram.API.Controllers
             }
             catch (WebException wex)
             {
-                CheckWebException<LikeException, LikeFailedResponse>(wex, "Failed to (un)like. Could not (un)like.");
+                CheckWebException<LikeException>(wex, "Failed to (un)like. Could not (un)like.");
             }
             catch (Exception ex)
             {
@@ -230,14 +230,13 @@ namespace Ninja.Instagram.API.Controllers
         #endregion
 
         #region Miscellaneous
-        private static void CheckWebException<Tex, Tres>(WebException wex, string exceptionMessage) where Tex : Exception
+        private static void CheckWebException<Tex>(WebException wex, string exceptionMessage) where Tex : Exception
         {
             using (HttpWebResponse response = wex.Response as HttpWebResponse)
             {
                 if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
                     string source = (wex.Response as HttpWebResponse).ReadResponse();
-                    Tres json = _deserializer.Deserialize<Tres>(source);
                     throw Activator.CreateInstance(typeof(Tex), wex.Message, wex) as Tex;
                 }
                 else
