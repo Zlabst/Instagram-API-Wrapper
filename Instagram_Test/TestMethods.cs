@@ -17,24 +17,17 @@ namespace Instagram_Test
         [TestMethod]
         public void Login()
         {
-<<<<<<< HEAD
             //jasdasaa122:keanumats123
             //kaaajsaaan:keanumats123
-            _account = AccountController.Login("janisgeenman123", "keanumats");
-            _user = UserController.Lookup("we.killed.pepe");
-            _picture = PictureController.Lookup("_Nt-0EB907");
-=======
-            Instagram.Initialize();
             _account = AccountController.Login("username", "password"); //you can add a webproxy object as a parameter here.
             _user = UserController.Lookup("other username");
             _picture = PictureController.Lookup("picture ID"); //found in the URL. For example https://www.instagram.com/p/_Nt-0EB907/. The picture ID here is _Nt-0EB907.
->>>>>>> origin/master
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void Register()
         {
-            Account account = AccountController.Create("username", "password", "email", "Full Name");
+            Account account = AccountController.Create("username", "password", "email", "full name");
         }
         
         [TestMethod]
